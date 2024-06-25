@@ -1,15 +1,16 @@
 package com.mindu.go.loginjoinjsp.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 
 @Data
-
-public class MemberDTO {
+@AllArgsConstructor
+@NoArgsConstructor
+public class MemberVO {
     private String userid;
-    private String pass;
-    private String salt;
     private String name;
     private Timestamp birth;
     private String email;

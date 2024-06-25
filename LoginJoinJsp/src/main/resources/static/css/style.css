@@ -33,7 +33,14 @@ input{
 input::placeholder{
     color: #D2D2D2;
 }
-input[type="submit"]{
+input.submit{
+    color: #fff;
+    font-size: 16px;
+    background-color: #6A24FE;
+    margin-top: 20px;
+    cursor: pointer;
+}
+input.button{
     color: #fff;
     font-size: 16px;
     background-color: #6A24FE;
