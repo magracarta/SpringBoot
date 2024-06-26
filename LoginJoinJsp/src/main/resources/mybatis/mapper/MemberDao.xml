@@ -8,4 +8,14 @@
     <select id="getMember" resultType="com.mindu.go.loginjoinjsp.dto.MemberDTO">
         select * from mmember where userid = #{param1};
     </select>
+    <select id="getMemberList" resultType="com.mindu.go.loginjoinjsp.dto.MemberVO">
+        select * from mmember order by createdate desc
+    </select>
+    <select id="getCode" resultType="java.lang.String">
+        select vcode from emailcode  where userid = #{param1} order by id desc limit 1;
+    </select>
+    <insert id="insertMember" parameterType="com.mindu.go.loginjoinjsp.dto.MemberDTO">
+        insert into mmember (userid, pass, salt, name,birth,email,provider,image,saveimage)
+        values (#{userid} , #{pass} , #{salt} , #{name} , #{birth} , #{email}, #{provider} , #{image} , #{saveimage})
+    </insert>
 </mapper>

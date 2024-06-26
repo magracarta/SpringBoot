@@ -48,6 +48,14 @@ dependencies {
     implementation 'commons-io:commons-io:2.11.0'    /* Apache commons-io */
     implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4' /* Apache Commons FileUpload */
 
+    //이메일
+    implementation 'javax.mail:mail:1.4.7'
+    // Spring Context Support
+    implementation 'org.springframework:spring-context-support:5.3.9'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.6.3'
+
+
+
 }
 
 tasks.named('test') {

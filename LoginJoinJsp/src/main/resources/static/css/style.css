@@ -10,7 +10,6 @@ body{
 
 .wrapper{
     width: 400px;
-    height: 350px;
     padding: 100px 40px;
     box-sizing: border-box;
     margin: auto;
@@ -58,8 +57,7 @@ label{
 }
 
 .text-button { color: #000;  }
-.msg { text-align: right; color: #ff0000; margin-bottom: 30px;  }
-.msg p { display: inline-block; }
+
 
 .sns-login { text-align: center; margin: 30px 0; display: flex; gap: 10px; }
 .sns-login img { width: 50px; }
@@ -78,3 +76,82 @@ button {
 button:hover {
 
 }
+
+/* 리스트 css */
+.wrapperlist { max-width: 800px; width: 95%;  }
+.memberlist-wrap ul { list-style: none; margin: 0; padding: 0;margin-top: 80px; }
+.memberlist-wrap ul li {  display: flex; width: 100%; padding: 15px 0; border-top: 1px solid #ddd; }
+.memberlist-wrap ul li:last-child { border-bottom: 1px solid #ddd; }
+.memberlist-wrap ul li.top { font-weight: 600; background: #ededed; }
+.memberlist-wrap ul li > div { display: flex; align-items: center; justify-content: center; }
+.userid {width: 20%;}
+.name { width: 20%; }
+.loginrole { width: 20%; }
+.img { width: 14%; }
+.img img { width: 50px; height: 50px; border-radius: 50%; }
+.email {width: 25%;  }
+
+
+/* 회원가입 */
+.joinButton { pointer-events: none; }
+.joinButton { color: #fff;
+    font-size: 16px;
+    background-color: #6A24FE;
+    margin-top: 20px;
+    cursor: pointer;
+    pointer-events:all;
+}
+
+.joinbutton-container { margin-top: 80px; }
+.msg { text-align: center; color: #ff0000; margin-bottom: 10px; display: none;  }
+.msg p { display: inline-block; }
+
+
+.image-section { margin-top: 30px;  }
+.image-section .img-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center
+
+}
+.image-section .img-box img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; }
+.image-section .img-box button { width: 100%; margin: 10px 0; }
+.image-section .img-box button:last-child { background: #6A24FE; color: #fff; }
+.image-section .proflie {  display: none; }
+
+
+.icheckpopup { position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 100px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 0px 52px rgba(0, 0, 0, 0.2);
+
+}
+.close {     position: absolute;
+    right: 30px;
+    top: 30px;
+    font-size: 27px;
+    color: #000;
+    text-decoration: none;}
+.icheckpopup a.checkedok { color: #fff;
+    font-size: 16px;
+    background-color: #6A24FE;
+    margin-top: 20px;
+    cursor: pointer;
+    pointer-events:all; display: inline-block; padding: 10px 20px; text-decoration: none; }
+
+
+
+
+#verification-section { display: none; }
+.button-wrap button.off { border: 1px solid #999; color: #999; pointer-events: none; }
+
+
+#verification-section .button-wrap .timerbox {     display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;}

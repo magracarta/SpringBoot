@@ -16,5 +16,7 @@ public class MemberVO {
     private String email;
     private String provider;
     private Timestamp createdate;
+    private String image;
+    private  String saveimage;
 
 }

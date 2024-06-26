@@ -35,7 +35,7 @@
         </div>
       </div>
 
-      <input type="submit" value="가입하기">
+      <input class="joinButton" type="submit" value="가입하기">
     </form>
     <a class="text-button" href="/">로그인 폼으로 돌아가기</a>
   </div>

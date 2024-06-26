@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Title</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+<form name="join" method="post" style="display: block;" enctype="multipart/form-data" >
+    <div class="wrapper">
+        <h2>JOIN</h2>
+
+            <label>아이디</label>
+            <input type="text" name="userid" placeholder="ID">
+            <input type="hidden" name="idcheck">
+            <button type="button" class="idcheck">아이디 인증</button>
+            <label>비밀번호</label>
+            <input type="password" name="pass" placeholder="Password">
+            <input type="password" name="passCheck" placeholder="Password Check">
+
+            <label>이름</label>
+            <input type="text" name="name" placeholder="Name">
+
+            <label>생년월일</label>
+            <input type="date" id="birthdate" name="birthdate" required>
+
+            <label>Email</label>
+            <input type="text" name="email" placeholder="Email">
+            <div class="button-wrap">
+                <button type="button" onclick="sendVerificationCode()">인증 코드 전송</button>
+            </div>
+            <div id="verification-section">
+                <label for="verification-code">인증 코드:</label>
+                <input type="text" id="verification-code" name="vcode">
+                <div class="button-wrap">
+                    <button type="button" onclick="verifyCode()">인증 코드 확인</button>
+                </div>
+            </div>
+        <div class="image-section">
+            <div class="img-box">
+                <img src="/images/noimage.jpg">
+                <button class="imageinsert" type="button">이미지 삽입</button>
+                <button class="imagedelete" type="button">이미지 빼기</button>
+            </div>
+            <input type="file" class="proflie" name="file" onchange="readURL(this)">
+        </div>
+        <div class="joinbutton-container">
+            <div class="msg">*<p>비밀번호 체크해주세요.</p></div>
+            <input class="joinButton" type="submit" value="가입하기">
+
+        </div>
+        <a class="text-button" href="/">로그인 폼으로 돌아가기</a>
+    </div>
+</form>
+</body>
+
+
+<div class="icheckpopup">
+    <a href="javascript:0" class="close">X</a>
+    <p>사용가능한 아이디 입니다.</p>
+    <a href="javascript:0" class="checkedok">사용하기</a>
+</div>
+
+<script src="/script/email.js"></script>
+<script src="/script/join.js"></script>
+<script src="/script/idcheck.js"></script>
