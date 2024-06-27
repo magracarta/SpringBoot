@@ -15,7 +15,19 @@
         select vcode from emailcode  where userid = #{param1} order by id desc limit 1;
     </select>
     <insert id="insertMember" parameterType="com.mindu.go.loginjoinjsp.dto.MemberDTO">
-        insert into mmember (userid, pass, salt, name,birth,email,provider,image,saveimage)
-        values (#{userid} , #{pass} , #{salt} , #{name} , #{birth} , #{email}, #{provider} , #{image} , #{saveimage})
+        insert into mmember (userid, pass, salt, name,birth,email,provider,image,saveimage , zip_code,address1, address2 , address3)
+        values (#{userid} , #{pass} , #{salt} , #{name} , #{birth} , #{email}, #{provider} , #{image} , #{saveimage} , #{zip_code}, #{address1}, #{address2}, #{address3})
+    </insert>
+    <insert id="insertSnsMember" parameterType="com.mindu.go.loginjoinjsp.dto.KakaoProfile">
+        insert into mmember (userid, pass, provider , name) values( #{id} , 'snsloginQ!W@E#R$T%Y^U','kakao' , #{properties.nickname});
+    </insert>
+    <select id="getKakaMember" resultType="com.mindu.go.loginjoinjsp.dto.MemberVO">
+        select * from mmember where provider = 'kakao' and userid = #{param1}
+    </select>
+    <select id="getNaverMember" resultType="com.mindu.go.loginjoinjsp.dto.MemberVO" parameterType="com.mindu.go.loginjoinjsp.dto.NaverApi">
+        select * from mmember where provider = 'naver' and userid = #{response.id}
+    </select>
+    <insert id="insertNaverMember" parameterType="com.mindu.go.loginjoinjsp.dto.NaverApi">
+        insert into mmember (userid, pass, provider , name) values( #{response.id} , 'snsloginQ!W@E#R$T%Y^U','naver' , #{response.name});
     </insert>
 </mapper>

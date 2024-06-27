@@ -1,24 +1,35 @@
+
 let loginuser;
-fetchSessionData();
+
 function fetchSessionData() {
-    fetch("/session",{
+    return new Promise((resolve, reject)=>{
+        fetch("/session",{
         method:'GET'
-    }).then(reponse=>{
-        if(!reponse.ok) throw new Error("네트워크 오류"+reponse.statusText);
-        return reponse.json();
-    }).then(data=>{
-        loginuser = data;
+        }).then(reponse=>{
+            if(!reponse.ok) throw new Error("네트워크 오류"+reponse.statusText);
+            return reponse.json();
+        }).then(data=>{
+            resolve(data);
 
-    }).catch(data =>{
-        console.error(error);
+        }).catch(data =>{
+            reject(data);
+         });
     });
-
 }
 
-setTimeout(()=>{alreadLogin()},500);
+alreadLogin();
 function alreadLogin(){
-    if(loginuser.loginUser != null && location.href.indexOf("index.html") > 1) {
-        alert("이미 로그인 하셨습니다.");
-        location.href="memberlist.html";
-    }
+    fetchSessionData().then(data=>{
+        loginuser = data;
+        if(loginuser.loginUser != null && location.href.indexOf("index.html") > 1) {
+            alert("이미 로그인 하셨습니다.");
+            location.href="memberlist.html";
+        }else if(loginuser.loginUser == null && location.href.indexOf("memberlist.html") > 2){
+            alert("로그인 후 이용해주세요.");
+            location.href="/";
+        }
+    }).catch(date=>{
+        console.error(date);
+    })
+
 }

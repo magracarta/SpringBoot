@@ -3,6 +3,7 @@ package com.mindu.go.loginjoinjsp.controller;
 import com.mindu.go.loginjoinjsp.dto.MemberDTO;
 import com.mindu.go.loginjoinjsp.dto.MemberVO;
 import com.mindu.go.loginjoinjsp.service.MemberService;
+import com.mindu.go.loginjoinjsp.service.SNSLoginService;
 import com.mindu.go.loginjoinjsp.util.Utillity;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpSession;
@@ -28,11 +29,13 @@ public class MemberRestController {
     private final MemberService memberService;
     private final Utillity ut;
      private final ServletContext sct;
+     private final SNSLoginService sc;
     @Autowired
-    public MemberRestController(MemberService memberService, Utillity ut, ServletContext sct) {
+    public MemberRestController(MemberService memberService, Utillity ut, ServletContext sct, SNSLoginService sc) {
         this.memberService = memberService;
         this.ut = ut;
         this.sct = sct;
+        this.sc = sc;
     }
 
     @PostMapping("login")
@@ -48,8 +51,8 @@ public class MemberRestController {
         }else if(ut.sha256(memberdto.getPass() , salt).equals(mvo.getPass()) ){
             list.put("loginCheck",1);
             MemberVO logindata = new MemberVO(
-                    mvo.getUserid(),mvo.getName(),mvo.getBirth(), mvo.getEmail(), mvo.getProvider() , mvo.getCreatedate() , mvo.getImage() , mvo.getSaveimage()
-            );
+                    mvo.getUserid(),mvo.getName(),mvo.getBirth(), mvo.getEmail(), mvo.getProvider() , mvo.getCreatedate() , mvo.getImage() , mvo.getSaveimage(),
+                    mvo.getZip_code(), mvo.getAddress1(), mvo.getAddress2(), mvo.getAddress3());
             session.setAttribute("loginUser", logindata);
         }
         return list;
@@ -65,6 +68,11 @@ public class MemberRestController {
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
+        MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
+        if(loginUser.getProvider()!= null && loginUser.getProvider().equals("kakao")){
+            sc.kakaoLogout(session);
+        }
+
         session.removeAttribute("loginUser"); // "loginUser" 세션 속성 제거
         session.invalidate(); // 세션 전체 무효화
         return "로그아웃 완료";

@@ -4,6 +4,7 @@
     <title>Title</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
 <form name="join" method="post" style="display: block;" enctype="multipart/form-data" >
@@ -29,13 +30,21 @@
             <div class="button-wrap">
                 <button type="button" onclick="sendVerificationCode()">인증 코드 전송</button>
             </div>
-            <div id="verification-section">
-                <label for="verification-code">인증 코드:</label>
-                <input type="text" id="verification-code" name="vcode">
-                <div class="button-wrap">
-                    <button type="button" onclick="verifyCode()">인증 코드 확인</button>
-                </div>
+
+        <div id="verification-section">
+            <label for="verification-code">인증 코드:</label>
+            <input type="text" id="verification-code" name="vcode">
+            <div class="button-wrap">
+                <button type="button" onclick="verifyCode()">인증 코드 확인</button>
             </div>
+        </div>
+        <label>주소</label>
+        <input type="text" id="sample6_postcode" name="zip_code" placeholder="우편번호" readonly>
+        <input type="text" id="sample6_address" name="address1" placeholder="주소" readonly>
+        <input type="text" id="sample6_detailAddress" name="address2" placeholder="상세주소">
+        <input type="text" id="sample6_extraAddress" name="address3" placeholder="참고항목" readonly>
+        <button type="button" onclick="sample6_execDaumPostcode()" >우편번호 찾기</button>
+
         <div class="image-section">
             <div class="img-box">
                 <img src="/images/noimage.jpg">

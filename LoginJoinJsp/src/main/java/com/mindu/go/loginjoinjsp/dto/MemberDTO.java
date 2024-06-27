@@ -30,4 +30,14 @@ public class MemberDTO {
     private  String saveimage;
 
 
+    @NotEmpty(message = "우편번호를 입력해주세요.")
+    @NotNull(message = "우편번호를 입력해주세요.")
+    private String zip_code;
+    private String address1;
+
+    @NotEmpty(message = "상세주소 입력해주세요.")
+    @NotNull(message = "상세주소 입력해주세요.")
+    private String address2;
+    private String address3;
+
 }

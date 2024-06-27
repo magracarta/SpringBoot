@@ -1,3 +1,13 @@
+
+//본인 정보 뿌리기
+fetchSessionData().then(data=>{
+    userinfo();
+}).catch(error=>{
+    console.error("데이터를 전송받지 못했습니다.")
+});
+
+
+
 document.querySelector(".logout").addEventListener("click",()=>{
     if(confirm("정말로 로그아웃 하시겠습니까?")){
         fetch("/logout").then(reponse=>{
@@ -35,4 +45,21 @@ function memberList(){
                 </li>`;
     });
 
+}
+
+function userinfo(){
+    document.querySelector(".username").innerHTML=loginuser.loginUser.name;
+    if(loginuser.loginUser.saveimage != null)document.querySelector(".userInfo img").src="/images/"+loginuser.loginUser.saveimage;
+
+}
+//회원 삭제
+function deleteFn(){
+    let userid= loginuser.loginUser.userid;
+    if(confirm("정말로 탈퇴하시겠습니까?")){
+        fetch("/delete?userid="+userid).then(reponse=>{
+            return reponse.text();
+        }).then(data=>{
+
+        }).catch()
+    }
 }
