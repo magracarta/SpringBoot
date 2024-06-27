@@ -26,4 +26,8 @@ public interface MemberDao {
     MemberVO getNaverMember(NaverApi naverApi);
 
     int insertNaverMember(NaverApi naverApi);
+
+    int deleteMember(String userid);
+
+    void updateMember(MemberDTO memberdto);
 }

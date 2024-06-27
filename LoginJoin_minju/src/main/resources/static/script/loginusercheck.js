@@ -1,4 +1,3 @@
-
 let loginuser;
 
 function fetchSessionData() {
@@ -10,7 +9,6 @@ function fetchSessionData() {
             return reponse.json();
         }).then(data=>{
             resolve(data);
-
         }).catch(data =>{
             reject(data);
          });
@@ -24,12 +22,12 @@ function alreadLogin(){
         if(loginuser.loginUser != null && location.href.indexOf("index.html") > 1) {
             alert("이미 로그인 하셨습니다.");
             location.href="memberlist.html";
-        }else if(loginuser.loginUser == null && location.href.indexOf("memberlist.html") > 2){
+        }else if(loginuser.loginUser == null && location.href.indexOf("index.html") < 0 && location.href.indexOf("joinForm.html") < 0){
             alert("로그인 후 이용해주세요.");
             location.href="/";
         }
-    }).catch(date=>{
-        console.error(date);
+    }).catch(data=>{
+        console.error(data);
     })
 
 }

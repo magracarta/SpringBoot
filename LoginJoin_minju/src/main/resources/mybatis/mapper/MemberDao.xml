@@ -28,6 +28,13 @@
         select * from mmember where provider = 'naver' and userid = #{response.id}
     </select>
     <insert id="insertNaverMember" parameterType="com.mindu.go.loginjoinjsp.dto.NaverApi">
-        insert into mmember (userid, pass, provider , name) values( #{response.id} , 'snsloginQ!W@E#R$T%Y^U','naver' , #{response.name});
+        insert into mmember (userid, pass, provider , name ,email) values( #{response.id} , 'snsloginQ!W@E#R$T%Y^U','naver' , #{response.name} , #{response.email});
     </insert>
+    <delete id="deleteMember">
+        delete from mmember where userid = #{param1}
+    </delete>
+    <update id="updateMember" parameterType="com.mindu.go.loginjoinjsp.dto.MemberDTO">
+        update mmember set pass = #{pass} , salt=#{salt} , name= #{name}, birth=#{birth} , email = #{email}
+        , image = #{image}, saveimage = #{saveimage} , zip_code = #{zip_code}, address1= #{address1}, address2 = #{address2} , address3= #{address3} where userid = #{userid}
+    </update>
 </mapper>

@@ -59,7 +59,14 @@ function deleteFn(){
         fetch("/delete?userid="+userid).then(reponse=>{
             return reponse.text();
         }).then(data=>{
-
-        }).catch()
+            if(data == 1){
+                alert("회원탈퇴 했습니다. 감사합니다 (_ _)");
+                location.href="/";
+            }else {
+                alert("회원탈퇴에 실패했습니다. 관리자에게 연락해보세유ㅠㅠㅠ");
+            }
+        }).catch(date=>{
+            console.error(date);
+        });
     }
 }

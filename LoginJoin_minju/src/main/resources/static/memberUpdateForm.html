@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Title</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script src = "/script/loginusercheck.js" ></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</head>
+<body>
+<form name="update" method="post" style="display: block;" enctype="multipart/form-data" >
+    <div class="wrapper">
+        <h2>회원 수정</h2>
+        <label>아이디</label>
+        <input type="text" name="userid" placeholder="ID" readonly>
+        <label>비밀번호</label>
+        <input type="password" name="pass" placeholder="Password">
+        <input type="password" name="passCheck" placeholder="Password Check">
+
+        <label>이름</label>
+        <input type="text" name="name" placeholder="Name">
+
+        <label>생년월일</label>
+        <input type="date" id="birthdate" name="birthdate" required>
+
+        <label>Email</label>
+        <input type="text" name="email" placeholder="Email">
+
+        <label>주소</label>
+        <input type="text" id="sample6_postcode" name="zip_code" placeholder="우편번호" readonly>
+        <input type="text" id="sample6_address" name="address1" placeholder="주소" readonly>
+        <input type="text" id="sample6_detailAddress" name="address2" placeholder="상세주소">
+        <input type="text" id="sample6_extraAddress" name="address3" placeholder="참고항목" readonly>
+        <button type="button" onclick="sample6_execDaumPostcode()" >우편번호 찾기</button>
+
+        <div class="image-section">
+            <div class="img-box">
+                <img src="/images/noimage.jpg">
+                <button class="imageinsert" type="button">이미지 삽입</button>
+                <button class="imagedelete" type="button">이미지 빼기</button>
+            </div>
+            <input type="file" class="proflie" name="file" onchange="readURL(this)">
+            <input type="hidden" name="beforeImage">
+        </div>
+        <div class="joinbutton-container">
+            <div class="msg">*<p>비밀번호 체크해주세요.</p></div>
+            <input class="joinButton" type="submit" value="수정하기">
+        </div>
+        <a class="text-button" href="/memberlist.html">리스트로 돌아가기</a>
+    </div>
+</form>
+</body>
+<script src="/script/updateForm.js"></script>
+
+

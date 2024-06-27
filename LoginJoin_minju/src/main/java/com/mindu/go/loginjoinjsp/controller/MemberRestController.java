@@ -176,4 +176,81 @@ public class MemberRestController {
     }
 
 
+    @RequestMapping("/delete")
+    public int delete(@RequestParam("userid") String userid){
+        return memberService.deleteMember(userid);
+    }
+
+    @RequestMapping("/update")
+    public Map<String, Object> update(@ModelAttribute("memberdto") @Valid MemberDTO memberdto, BindingResult result  ,
+                                      @RequestParam("passCheck") String passCheck  , @RequestParam(value = "birthdate" ,required = false) String birthdate ,@RequestParam(value = "beforeImage",required = false) String beforeImage , @RequestParam("file") MultipartFile file , HttpSession session ) throws IllegalAccessException {
+
+        Map<String, Object> list = new HashMap<>();
+        boolean validCheck = true;;
+        if(birthdate!= null){
+            LocalDate ld = LocalDate.parse(birthdate);
+            Timestamp birth = Timestamp.valueOf(ld.atStartOfDay());
+            memberdto.setBirth(birth);
+        }
+        for(Field f : memberdto.getClass().getDeclaredFields()){
+            f.setAccessible(true);
+            if(result.getFieldError(f.getName()) != null){
+                list.put("message",result.getFieldError(f.getName()).getDefaultMessage());
+                validCheck = false;
+                break;
+            }
+            if(f.getName().equals("pass") ){
+                if(!f.get(memberdto).equals(passCheck)){
+                    list.put("message","비밀번호체크를 확인 해주세요.");
+                    validCheck = false;
+                    break;
+                }
+            }
+        }
+
+
+        //이미지 추가~~
+        if(!file.isEmpty()){
+            String filePath = sct.getRealPath("/images");
+            if(beforeImage !=null){
+                File removeFile = new File(filePath + File.separator + beforeImage);
+                if(removeFile.exists()){
+                    removeFile.delete();
+                }
+            }
+            LocalDateTime ldt = LocalDateTime.now();
+            String datastring = ldt.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS"));
+            String fileName = file.getOriginalFilename();
+
+            String f1 = fileName.substring(0,fileName.indexOf("."));
+            String f2 = fileName.substring(fileName.indexOf("."));
+
+            String saveFilename = f1 + datastring + f2;
+
+            try {
+                file.transferTo(new File(filePath + File.separator + saveFilename));
+                memberdto.setImage(fileName);
+                memberdto.setSaveimage(saveFilename);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        if(validCheck){
+            //인서트문 추가~
+            String salt = ut.saltmake();
+            System.out.println(salt);
+            memberdto.setPass(
+                    ut.sha256(memberdto.getPass(), salt)
+            );
+            memberdto.setSalt(salt);
+            memberService.updateMember(memberdto);
+            MemberVO logindata = new MemberVO(
+                    memberdto.getUserid(),memberdto.getName(),memberdto.getBirth(), memberdto.getEmail(), memberdto.getProvider() , memberdto.getCreatedate() , memberdto.getImage() , memberdto.getSaveimage(),
+                    memberdto.getZip_code(), memberdto.getAddress1(), memberdto.getAddress2(), memberdto.getAddress3());
+            list.put("upate" , 1);
+            session.setAttribute("loginUser",logindata);
+        }
+        return list;
+    }
 }

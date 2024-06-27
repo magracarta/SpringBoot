@@ -61,4 +61,13 @@ public class MemberService {
     public int insertNaverMember(NaverApi naverApi) {
         return memberDao.insertNaverMember(naverApi);
     }
+
+    public int deleteMember(String userid) {
+        return memberDao.deleteMember(userid);
+    }
+
+
+    public void updateMember(MemberDTO memberdto) {
+        memberDao.updateMember(memberdto);
+    }
 }
